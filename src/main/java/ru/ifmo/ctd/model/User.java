@@ -1,40 +1,20 @@
 package ru.ifmo.ctd.model;
 
-import org.bson.Document;
-
-import java.util.Map;
+import java.sql.Timestamp;
 
 public class User {
-    private final int myId;
-    private final Currency myCurrency;
-    private final String myLogin;
+    public final int id;
+    public final String name;
+    public long membershipExpirationTs;
 
-    public User(int id, Currency currency, String login) {
-        myId = id;
-        myCurrency = currency;
-        myLogin = login;
-    }
-
-    public User(Document doc) {
-        this(doc.getInteger("id"),
-                Currency.valueOf(doc.getString("currency")),
-                doc.getString("login"));
-    }
-
-    public Document toDocument() {
-        return new Document(Map.of("id", myId, "currency", myCurrency.name(), "login", myLogin));
+    public User(int id, String name, long membershipExpirationTs) {
+        this.id = id;
+        this.name = name;
+        this.membershipExpirationTs = membershipExpirationTs;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + myId +
-                ", currency='" + myCurrency.name() + '\'' +
-                ", login='" + myLogin + '\'' +
-                '}';
-    }
-
-    public Integer getId() {
-        return myId;
+        return String.format("User with name: %s, has membership expiring at: %s", name, new Timestamp(membershipExpirationTs).toString());
     }
 }
