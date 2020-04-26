@@ -30,7 +30,7 @@ public class ManagerQueryHandlerTest {
 
     @Test
     public void testGetInfoForNonExistingUser() {
-        int nonExistingUserId = 2;
+        int nonExistingUserId = testUserId + 1;
         GetInfoQuery query = new GetInfoQuery(nonExistingUserId);
         String result = handler.handle(query);
         assertEquals("No user found", result);

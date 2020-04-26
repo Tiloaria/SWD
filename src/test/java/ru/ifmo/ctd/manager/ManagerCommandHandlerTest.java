@@ -33,7 +33,7 @@ public class ManagerCommandHandlerTest {
 
     @Test
     public void testRenewSubscriptionForNonExistingUser() {
-        int nonExistingUserId = 2;
+        int nonExistingUserId = testUserId + 1;
         RenewSubscriptionCommand command = new RenewSubscriptionCommand(nonExistingUserId, validExpirationTs);
         String result = handler.handle(command);
         assertEquals("No user found", result);

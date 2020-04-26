@@ -49,7 +49,8 @@ public class TurnstileCommandHandlerTest {
     @Test
     public void testTurnstileRejectsUserWithUnknownId() throws IOException {
         long currentTime = System.currentTimeMillis();
-        EnterCommand command = new EnterCommand(2, currentTime);
+        int nonExistingUserId = testUserId + 1;
+        EnterCommand command = new EnterCommand(nonExistingUserId, currentTime);
         String result = handler.handle(command);
         assertEquals("No user found", result);
         verify(mockNotifier, times(0)).sendNotification(eq(2), eq(currentTime), any(PassType.class));
